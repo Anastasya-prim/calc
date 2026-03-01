@@ -1,0 +1,61 @@
+/* Базовые стили для читаемости и удобства */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.calculator {
+  border: 1px solid #ddd;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+h1 {
+  font-size: 1.25rem;
+  margin-top: 0;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #555;
+}
+
+.result {
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  min-height: 2rem;
+}
