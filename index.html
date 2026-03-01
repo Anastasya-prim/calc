@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Калькулятор стоимости корпусной мебели (V3)</title>
+  <title>Калькулятор стоимости корпусной мебели (V5)</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -34,6 +34,14 @@
         <option value="250">МДФ (250 ₽/дм³)</option>
         <option value="500">Массив (500 ₽/дм³)</option>
       </select>
+    </div>
+
+    <!-- Доп. опции: фиксированная цена добавляется к итогу -->
+    <div class="input-group options-group">
+      <label>Доп. опции</label>
+      <label class="option-item"><input type="checkbox" class="option" data-price="5000"> Стеклянная дверца (+5 000 ₽)</label>
+      <label class="option-item"><input type="checkbox" class="option" data-price="2000"> Обувница (+2 000 ₽)</label>
+      <label class="option-item"><input type="checkbox" class="option" data-price="3000"> Подсветка (+3 000 ₽)</label>
     </div>
 
     <button type="button" id="calcBtn">Рассчитать стоимость</button>

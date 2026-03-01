@@ -1,9 +1,10 @@
 /**
- * Калькулятор стоимости корпусной мебели (V3)
+ * Калькулятор стоимости корпусной мебели (V5)
  *
  * Формула расчёта:
  *   объём_в_дм³ = (ширина × высота × глубина) / 1000
- *   цена = объём_в_дм³ × коэффициент_материала
+ *   базовая_цена = объём_в_дм³ × коэффициент_материала
+ *   итог = базовая_цена + сумма_выбранных_опций
  */
 
 // Ждём загрузки страницы — иначе элементы (поля, кнопка) ещё не существуют
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const inputHeight = document.getElementById('height');
   const inputDepth = document.getElementById('depth');
   const inputMaterial = document.getElementById('material');
+  const optionCheckboxes = document.querySelectorAll('.option');
   const buttonCalculate = document.getElementById('calcBtn');
   const blockResult = document.getElementById('result');
 
@@ -40,10 +42,21 @@ document.addEventListener('DOMContentLoaded', function () {
     // 3.3 Считаем объём в кубических дециметрах (1000 см³ = 1 дм³)
     const volumeDm3 = (widthCm * heightCm * depthCm) / 1000;
 
-    // 3.4 Считаем цену
-    const priceRub = volumeDm3 * pricePerDm3;
+    // 3.4 Считаем базовую цену
+    const basePrice = volumeDm3 * pricePerDm3;
 
-    // 3.5 Показываем результат (пробелы между тысячами, 2 знака после запятой)
+    // 3.5 Суммируем выбранные доп. опции (data-price — цена за опцию)
+    let optionsTotal = 0;
+    optionCheckboxes.forEach(function (cb) {
+      if (cb.checked) {
+        optionsTotal += parseFloat(cb.dataset.price);
+      }
+    });
+
+    // 3.6 Итог = базовая цена + опции
+    const priceRub = basePrice + optionsTotal;
+
+    // 3.7 Показываем результат (пробелы между тысячами, 2 знака после запятой)
     const formattedPrice = priceRub.toLocaleString('ru-RU', {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2

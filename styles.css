@@ -56,6 +56,23 @@ button:hover {
   background: #555;
 }
 
+/* ========== Доп. опции (чекбоксы) ========== */
+.options-group label:first-child {
+  margin-bottom: 0.5rem;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: normal;
+  margin-bottom: 0.25rem;
+}
+
+.option-item input {
+  width: auto;
+}
+
 /* ========== Блок результата ========== */
 .result {
   margin-top: 1rem;
