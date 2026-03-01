@@ -1,38 +1,54 @@
 /**
- * Калькулятор стоимости корпусной мебели (V2)
- * Формула: (ширина * высота * глубина / 1000) * коэффициент_материала = цена в рублях
+ * Калькулятор стоимости корпусной мебели (V3)
+ *
+ * Формула расчёта:
+ *   объём_в_дм³ = (ширина × высота × глубина) / 1000
+ *   цена = объём_в_дм³ × коэффициент_материала
  */
 
-// Ждём загрузки DOM, чтобы элементы были доступны
+// Ждём загрузки страницы — иначе элементы (поля, кнопка) ещё не существуют
 document.addEventListener('DOMContentLoaded', function () {
-  const widthInput = document.getElementById('width');
-  const heightInput = document.getElementById('height');
-  const depthInput = document.getElementById('depth');
-  const materialSelect = document.getElementById('material');
-  const calcBtn = document.getElementById('calcBtn');
-  const resultEl = document.getElementById('result');
 
-  calcBtn.addEventListener('click', calculatePrice);
+  // ========== Шаг 1: Находим элементы на странице ==========
+  const inputWidth = document.getElementById('width');
+  const inputHeight = document.getElementById('height');
+  const inputDepth = document.getElementById('depth');
+  const inputMaterial = document.getElementById('material');
+  const buttonCalculate = document.getElementById('calcBtn');
+  const blockResult = document.getElementById('result');
 
+  // ========== Шаг 2: Вешаем обработчик на кнопку ==========
+  buttonCalculate.addEventListener('click', calculatePrice);
+
+  // ========== Шаг 3: Функция расчёта ==========
   function calculatePrice() {
-    // Получаем значения из полей ввода
-    const width = parseFloat(widthInput.value);
-    const height = parseFloat(heightInput.value);
-    const depth = parseFloat(depthInput.value);
-    // Коэффициент материала (₽/дм³): ДСП 150, МДФ 250, Массив 500
-    const materialCoeff = parseFloat(materialSelect.value);
+    // 3.1 Читаем то, что ввёл пользователь
+    const widthCm = parseFloat(inputWidth.value);
+    const heightCm = parseFloat(inputHeight.value);
+    const depthCm = parseFloat(inputDepth.value);
+    const pricePerDm3 = parseFloat(inputMaterial.value); // ₽ за 1 дм³
 
-    // Проверка: все поля должны быть заполнены и больше 0
-    if (isNaN(width) || isNaN(height) || isNaN(depth) || width <= 0 || height <= 0 || depth <= 0) {
-      resultEl.textContent = 'Введите корректные размеры (числа больше 0)';
-      return;
+    // 3.2 Проверяем: введены ли корректные числа?
+    const sizesAreValid = !isNaN(widthCm) && !isNaN(heightCm) && !isNaN(depthCm);
+    const sizesArePositive = widthCm > 0 && heightCm > 0 && depthCm > 0;
+
+    if (!sizesAreValid || !sizesArePositive) {
+      blockResult.textContent = 'Введите корректные размеры (числа больше 0)';
+      return; // выходим из функции, расчёт не делаем
     }
 
-    // Формула: объём в дм³ * коэффициент материала
-    const volume = (width * height * depth) / 1000;
-    const price = volume * materialCoeff;
+    // 3.3 Считаем объём в кубических дециметрах (1000 см³ = 1 дм³)
+    const volumeDm3 = (widthCm * heightCm * depthCm) / 1000;
 
-    // Форматирование: пробелы как разделитель тысяч, 2 знака после запятой
-    resultEl.textContent = price.toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ₽';
+    // 3.4 Считаем цену
+    const priceRub = volumeDm3 * pricePerDm3;
+
+    // 3.5 Показываем результат (пробелы между тысячами, 2 знака после запятой)
+    const formattedPrice = priceRub.toLocaleString('ru-RU', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+    blockResult.textContent = formattedPrice + ' ₽';
   }
 });
+

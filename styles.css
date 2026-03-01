@@ -1,15 +1,16 @@
-/* Базовые стили для читаемости и удобства */
+/* ========== Базовые настройки ========== */
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; /* padding и border входят в размер элемента */
 }
 
 body {
   font-family: system-ui, sans-serif;
   max-width: 400px;
-  margin: 2rem auto;
+  margin: 2rem auto; /* центрируем по горизонтали */
   padding: 1rem;
 }
 
+/* ========== Блок калькулятора ========== */
 .calculator {
   border: 1px solid #ddd;
   padding: 1.5rem;
@@ -21,12 +22,13 @@ h1 {
   margin-top: 0;
 }
 
+/* ========== Группа: подпись + поле ввода ========== */
 .input-group {
   margin-bottom: 1rem;
 }
 
 label {
-  display: block;
+  display: block; /* подпись на отдельной строке */
   margin-bottom: 0.25rem;
   font-weight: 500;
 }
@@ -38,6 +40,7 @@ select {
   font-size: 1rem;
 }
 
+/* ========== Кнопка ========== */
 button {
   width: 100%;
   padding: 0.75rem;
@@ -53,6 +56,7 @@ button:hover {
   background: #555;
 }
 
+/* ========== Блок результата ========== */
 .result {
   margin-top: 1rem;
   padding: 1rem;
