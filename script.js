@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
   buttonCalculate.addEventListener('click', calculatePrice);
 
   function formatPrice(num) {
-    return num.toLocaleString('ru-RU', PRICE_FORMAT) + ' руб';
+    return num.toLocaleString('ru-RU', PRICE_FORMAT) + ' ₽';
   }
 
   function getMaterialName() {
