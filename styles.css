@@ -5,7 +5,7 @@
 
 body {
   font-family: system-ui, sans-serif;
-  max-width: 400px;
+  max-width: 800px; /* было 400px — расширено для layout форма + сводка справа */
   margin: 2rem auto; /* центрируем по горизонтали */
   padding: 1rem;
 }
@@ -80,4 +80,36 @@ button:hover {
   font-size: 1.25rem;
   font-weight: 600;
   min-height: 2rem;
+}
+
+/* ========== Layout: форма + сводка справа ========== */
+.calc-wrapper {
+  display: flex;
+  gap: 1.5rem;
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.calc-wrapper .calculator {
+  flex: 1;
+}
+
+.breakdown {
+  width: 280px;
+  padding: 1rem;
+  background: #f8f8f8;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.breakdown-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.breakdown-content {
+  font-size: 0.9rem;
+  line-height: 1.6;
 }

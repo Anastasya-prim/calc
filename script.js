@@ -1,5 +1,5 @@
 /**
- * Калькулятор стоимости корпусной мебели (V6)
+ * Калькулятор стоимости корпусной мебели (V7)
  *
  * Формула расчёта:
  *   объём_в_дм³ = (ширина × высота × глубина) / 1000
@@ -21,8 +21,28 @@ document.addEventListener('DOMContentLoaded', function () {
   const optionCheckboxes = document.querySelectorAll('.option');
   const buttonCalculate = document.getElementById('calcBtn');
   const blockResult = document.getElementById('result');
+  const blockBreakdownContent = document.getElementById('breakdownContent');
 
   buttonCalculate.addEventListener('click', calculatePrice);
+
+  function formatPrice(num) {
+    return num.toLocaleString('ru-RU', PRICE_FORMAT) + ' руб';
+  }
+
+  function getMaterialName() {
+    return inputMaterial.options[inputMaterial.selectedIndex].text.split(' ')[0];
+  }
+
+  function getSelectedOptionsList() {
+    const list = [];
+    optionCheckboxes.forEach(function (cb) {
+      if (cb.checked) {
+        const name = cb.closest('.option-item').textContent.trim().split(' (+')[0];
+        list.push(name);
+      }
+    });
+    return list.length ? list.join(', ') : '—';
+  }
 
   function calculatePrice() {
     // --- Входные данные ---
@@ -37,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!sizesAreValid || !sizesArePositive) {
       blockResult.textContent = ERROR_MESSAGE;
+      blockBreakdownContent.innerHTML = '';
       return;
     }
 
@@ -52,6 +73,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const priceRub = basePrice + optionsTotal;
+
+    // --- Итоговая сводка ---
+    blockBreakdownContent.innerHTML =
+      'Материал: ' + getMaterialName() + ' — ' + formatPrice(basePrice) + '<br>' +
+      'Доп. опции: ' + getSelectedOptionsList() + ' — ' + formatPrice(optionsTotal) + '<br>' +
+      'Итого: ' + formatPrice(priceRub);
 
     // --- Вывод ---
     blockResult.textContent = priceRub.toLocaleString('ru-RU', PRICE_FORMAT) + ' ₽';
