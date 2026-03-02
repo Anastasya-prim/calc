@@ -1,5 +1,5 @@
 /**
- * Калькулятор стоимости корпусной мебели (V5)
+ * Калькулятор стоимости корпусной мебели (V6)
  *
  * Формула расчёта:
  *   объём_в_дм³ = (ширина × высота × глубина) / 1000
@@ -7,10 +7,13 @@
  *   итог = базовая_цена + сумма_выбранных_опций
  */
 
-// Ждём загрузки страницы — иначе элементы (поля, кнопка) ещё не существуют
+const CM3_PER_DM3 = 1000; // 1000 см³ = 1 дм³
+const PRICE_FORMAT = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
+const ERROR_MESSAGE = 'Введите корректные размеры (числа больше 0)';
+
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ========== Шаг 1: Находим элементы на странице ==========
+  // --- Элементы страницы ---
   const inputWidth = document.getElementById('width');
   const inputHeight = document.getElementById('height');
   const inputDepth = document.getElementById('depth');
@@ -19,33 +22,28 @@ document.addEventListener('DOMContentLoaded', function () {
   const buttonCalculate = document.getElementById('calcBtn');
   const blockResult = document.getElementById('result');
 
-  // ========== Шаг 2: Вешаем обработчик на кнопку ==========
   buttonCalculate.addEventListener('click', calculatePrice);
 
-  // ========== Шаг 3: Функция расчёта ==========
   function calculatePrice() {
-    // 3.1 Читаем то, что ввёл пользователь
+    // --- Входные данные ---
     const widthCm = parseFloat(inputWidth.value);
     const heightCm = parseFloat(inputHeight.value);
     const depthCm = parseFloat(inputDepth.value);
-    const pricePerDm3 = parseFloat(inputMaterial.value); // ₽ за 1 дм³
+    const pricePerDm3 = parseFloat(inputMaterial.value);
 
-    // 3.2 Проверяем: введены ли корректные числа?
+    // --- Валидация ---
     const sizesAreValid = !isNaN(widthCm) && !isNaN(heightCm) && !isNaN(depthCm);
     const sizesArePositive = widthCm > 0 && heightCm > 0 && depthCm > 0;
 
     if (!sizesAreValid || !sizesArePositive) {
-      blockResult.textContent = 'Введите корректные размеры (числа больше 0)';
-      return; // выходим из функции, расчёт не делаем
+      blockResult.textContent = ERROR_MESSAGE;
+      return;
     }
 
-    // 3.3 Считаем объём в кубических дециметрах (1000 см³ = 1 дм³)
-    const volumeDm3 = (widthCm * heightCm * depthCm) / 1000;
-
-    // 3.4 Считаем базовую цену
+    // --- Расчёт ---
+    const volumeDm3 = (widthCm * heightCm * depthCm) / CM3_PER_DM3;
     const basePrice = volumeDm3 * pricePerDm3;
 
-    // 3.5 Суммируем выбранные доп. опции (data-price — цена за опцию)
     let optionsTotal = 0;
     optionCheckboxes.forEach(function (cb) {
       if (cb.checked) {
@@ -53,15 +51,10 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    // 3.6 Итог = базовая цена + опции
     const priceRub = basePrice + optionsTotal;
 
-    // 3.7 Показываем результат (пробелы между тысячами, 2 знака после запятой)
-    const formattedPrice = priceRub.toLocaleString('ru-RU', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
-    blockResult.textContent = formattedPrice + ' ₽';
+    // --- Вывод ---
+    blockResult.textContent = priceRub.toLocaleString('ru-RU', PRICE_FORMAT) + ' ₽';
   }
 });
 
