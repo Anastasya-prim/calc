@@ -5,8 +5,8 @@
 
 body {
   font-family: system-ui, sans-serif;
-  max-width: 800px; /* было 400px — расширено для layout форма + сводка справа */
-  margin: 2rem auto; /* центрируем по горизонтали */
+  max-width: 1100px; /* расширено под форму + сводка + сохранённые */
+  margin: 2rem auto;
   padding: 1rem;
 }
 
@@ -86,7 +86,7 @@ button:hover {
 .calc-wrapper {
   display: flex;
   gap: 1.5rem;
-  max-width: 700px;
+  max-width: 1000px;
   margin: 2rem auto;
   padding: 0 1rem;
 }
@@ -112,4 +112,96 @@ button:hover {
 .breakdown-content {
   font-size: 0.9rem;
   line-height: 1.6;
+}
+
+/* Сохранение расчёта внутри сводки */
+.breakdown-save {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+}
+.breakdown-save label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.breakdown-save .required {
+  color: #c00;
+}
+.breakdown-save input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+.breakdown-save button {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* Блок сохранённых расчётов */
+.saved-calc {
+  width: 300px;
+  min-width: 300px;
+  padding: 1rem;
+  background: #f0f4f8;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+.saved-calc-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+}
+.saved-calc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.saved-calc-empty {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+.saved-calc-item {
+  padding: 0.75rem;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 0.85rem;
+}
+.saved-calc-item-header {
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+.saved-calc-item-details {
+  line-height: 1.5;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+.saved-calc-item-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.saved-calc-item-actions button {
+  flex: 1;
+  width: auto;
+  padding: 0.4rem 0.5rem;
+  font-size: 0.8rem;
+}
+.btn-load {
+  background: #2a7;
+}
+.btn-load:hover {
+  background: #3b8;
+}
+.btn-delete {
+  background: #a33;
+}
+.btn-delete:hover {
+  background: #b44;
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Калькулятор стоимости корпусной мебели (V7)</title>
+  <title>Калькулятор стоимости корпусной мебели (V8)</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -54,6 +54,16 @@
   <aside class="breakdown" id="breakdown">
     <h3 class="breakdown-title">Итоговая сводка (детализация расчёта)</h3>
     <div class="breakdown-content" id="breakdownContent"></div>
+    <div class="breakdown-save">
+      <label for="calcName">Наименование расчёта <span class="required">*</span></label>
+      <input type="text" id="calcName" placeholder="Например: Шкаф в прихожую" required>
+      <button type="button" id="saveCalcBtn">Сохранить текущий расчёт</button>
+    </div>
+  </aside>
+
+  <aside class="saved-calc" id="savedCalc">
+    <h3 class="saved-calc-title">Сохранённые расчёты</h3>
+    <div class="saved-calc-list" id="savedCalcList"></div>
   </aside>
   </div>
 
