@@ -7,7 +7,9 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Обёртка: форма слева, сводка и сохранённые расчёты справа -->
   <div class="calc-wrapper">
+  <!-- Основная форма калькулятора -->
   <main class="calculator">
     <h1>Калькулятор стоимости корпусной мебели</h1>
 
@@ -47,13 +49,15 @@
 
     <button type="button" id="calcBtn">Рассчитать стоимость</button>
 
-    <!-- Блок для отображения результата -->
+    <!-- Сюда выводится итоговая сумма после нажатия "Рассчитать" -->
     <div class="result" id="result"></div>
   </main>
 
+  <!-- Блок справа: детализация + сохранение -->
   <aside class="breakdown" id="breakdown">
     <h3 class="breakdown-title">Итоговая сводка (детализация расчёта)</h3>
     <div class="breakdown-content" id="breakdownContent"></div>
+    <!-- Поле названия и кнопка сохранения (обязательно указать наименование) -->
     <div class="breakdown-save">
       <label for="calcName">Наименование расчёта <span class="required">*</span></label>
       <input type="text" id="calcName" placeholder="Например: Шкаф в прихожую" required>
@@ -61,6 +65,7 @@
     </div>
   </aside>
 
+  <!-- Блок справа: список сохранённых расчётов с кнопками Загрузить/Удалить -->
   <aside class="saved-calc" id="savedCalc">
     <h3 class="saved-calc-title">Сохранённые расчёты</h3>
     <div class="saved-calc-list" id="savedCalcList"></div>

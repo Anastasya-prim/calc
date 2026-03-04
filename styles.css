@@ -1,16 +1,16 @@
 /* ========== Базовые настройки ========== */
 * {
-  box-sizing: border-box; /* padding и border входят в размер элемента */
+  box-sizing: border-box; /* размер элемента = контент + padding + border */
 }
 
 body {
   font-family: system-ui, sans-serif;
-  max-width: 1100px; /* расширено под форму + сводка + сохранённые */
+  max-width: 1100px;
   margin: 2rem auto;
   padding: 1rem;
 }
 
-/* ========== Блок калькулятора ========== */
+/* ========== Основной блок: форма ввода (размеры, материал, опции) ========== */
 .calculator {
   border: 1px solid #ddd;
   padding: 1.5rem;
@@ -82,7 +82,7 @@ button:hover {
   min-height: 2rem;
 }
 
-/* ========== Layout: форма + сводка справа ========== */
+/* ========== Раскладка: три колонки (форма | сводка | сохранённые) ========== */
 .calc-wrapper {
   display: flex;
   gap: 1.5rem;
@@ -92,9 +92,10 @@ button:hover {
 }
 
 .calc-wrapper .calculator {
-  flex: 1;
+  flex: 1; /* форма занимает оставшееся место */
 }
 
+/* Блок "Итоговая сводка" — детализация и кнопка сохранения */
 .breakdown {
   width: 280px;
   padding: 1rem;
@@ -114,7 +115,7 @@ button:hover {
   line-height: 1.6;
 }
 
-/* Сохранение расчёта внутри сводки */
+/* Подблок внутри сводки: поле названия + кнопка "Сохранить" */
 .breakdown-save {
   margin-top: 1rem;
   padding-top: 1rem;
@@ -141,7 +142,7 @@ button:hover {
   font-size: 0.9rem;
 }
 
-/* Блок сохранённых расчётов */
+/* Блок "Сохранённые расчёты": карточки с данными и кнопками Загрузить/Удалить */
 .saved-calc {
   width: 300px;
   min-width: 300px;
@@ -193,12 +194,14 @@ button:hover {
   padding: 0.4rem 0.5rem;
   font-size: 0.8rem;
 }
+/* Кнопка "Загрузить" в карточке сохранённого расчёта */
 .btn-load {
   background: #2a7;
 }
 .btn-load:hover {
   background: #3b8;
 }
+/* Кнопка "Удалить" в карточке сохранённого расчёта */
 .btn-delete {
   background: #a33;
 }
