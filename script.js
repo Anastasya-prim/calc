@@ -32,6 +32,15 @@ document.addEventListener('DOMContentLoaded', function () {
   buttonCalculate.addEventListener('click', calculatePrice);
   buttonSaveCalc.addEventListener('click', saveCurrentCalculation);
 
+  // Мгновенный расчёт при изменении любых параметров (размеры, материал, чекбоксы)
+  inputWidth.addEventListener('input', calculatePrice);
+  inputHeight.addEventListener('input', calculatePrice);
+  inputDepth.addEventListener('input', calculatePrice);
+  inputMaterial.addEventListener('change', calculatePrice);
+  optionCheckboxes.forEach(function (checkbox) {
+    checkbox.addEventListener('change', calculatePrice);
+  });
+
   // При загрузке страницы сразу показываем список сохранённых расчётов (если есть)
   renderSavedList();
 
@@ -147,6 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
     list.unshift(saved);
     setSavedCalculations(list);
     renderSavedList();
+    inputCalcName.value = '';
   }
 
   /** Форматирует дату из ISO-строки в вид "ДД.ММ.ГГГГ, ЧЧ:ММ" */
