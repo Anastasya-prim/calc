@@ -12,9 +12,9 @@ body {
 
 /* ========== Основной блок: форма ввода (размеры, материал, опции) ========== */
 .calculator {
-  border: 1px solid #ddd;
   padding: 1.5rem;
   border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 h1 {
@@ -38,6 +38,15 @@ select {
   width: 100%;
   padding: 0.5rem;
   font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #555;
 }
 
 /* ========== Кнопка ========== */
@@ -54,6 +63,14 @@ button {
 
 button:hover {
   background: #555;
+}
+
+/* Кнопка "Рассчитать" — выделена цветом как главная */
+#calcBtn {
+  background: #2563eb;
+}
+#calcBtn:hover {
+  background: #1d4ed8;
 }
 
 /* ========== Доп. опции (чекбоксы) ========== */
@@ -80,6 +97,11 @@ button:hover {
   font-size: 1.25rem;
   font-weight: 600;
   min-height: 2rem;
+  transition: opacity 0.3s ease;
+}
+
+.result:empty {
+  display: none;
 }
 
 /* ========== Раскладка: три колонки (форма | сводка | сохранённые) ========== */
@@ -101,7 +123,7 @@ button:hover {
   padding: 1rem;
   background: #f8f8f8;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .breakdown-title {
@@ -149,7 +171,7 @@ button:hover {
   padding: 1rem;
   background: #f0f4f8;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 .saved-calc-title {
   font-size: 0.95rem;
@@ -207,4 +229,16 @@ button:hover {
 }
 .btn-delete:hover {
   background: #b44;
+}
+
+/* ========== Адаптивность: на узких экранах колонки складываются вертикально ========== */
+@media (max-width: 768px) {
+  .calc-wrapper {
+    flex-direction: column;
+  }
+  .breakdown,
+  .saved-calc {
+    width: 100%;
+    min-width: auto;
+  }
 }

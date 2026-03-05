@@ -89,7 +89,10 @@ document.addEventListener('DOMContentLoaded', function () {
   function getSavedCalculations() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : [];
+      const list = raw ? JSON.parse(raw) : [];
+      return list.filter(function (item) {
+        return item && typeof item.id === 'number' && !isNaN(item.id);
+      });
     } catch (e) {
       return [];
     }
